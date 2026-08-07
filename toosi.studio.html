@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>toosi studio</title>
+<style>
+  :root {
+    --blue: #2a3acb;                       /* ultramarine field */
+    --cream: #f2eee2;
+    --cream-mid: rgba(242,238,226,.62);
+    --cream-faint: rgba(242,238,226,.34);
+    --turq: #46b7e8;                        /* Moroccan-turquoise accent */
+    --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--blue); color: var(--cream); font-family: var(--sans); -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+  .wrap { max-width: 900px; margin: 0 auto; width: 100%; padding: 0 40px; flex: 1 1 auto; display: flex; flex-direction: column; }
+
+  .top { display: flex; justify-content: space-between; align-items: baseline; padding: 30px 0; font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--cream-mid); }
+
+  .hero { padding: 44px 0 60px; }
+  .hero h1 { font-size: clamp(64px, 15vw, 156px); font-weight: 800; letter-spacing: -.03em; line-height: .84; text-transform: lowercase; color: var(--cream); }
+  .hero .note { display: inline-block; margin-top: 22px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--cream-mid); }
+
+  .list { border-top: 2px solid var(--cream); margin-top: auto; }
+  .row { display: grid; grid-template-columns: 60px 1fr auto; align-items: center; gap: 20px; padding: 22px 4px; border-bottom: 1px solid rgba(242,238,226,.22); text-decoration: none; color: inherit; transition: padding-left .15s ease; }
+  .row .no { font-family: var(--mono); font-size: 12px; color: var(--turq); }
+  .row .nm { font-size: 30px; font-weight: 700; letter-spacing: -.01em; text-transform: lowercase; }
+  .row .st2 { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--cream-faint); }
+  a.row:hover { background: var(--cream); color: var(--blue); padding-left: 16px; }
+  a.row:hover .no, a.row:hover .st2 { color: var(--blue); }
+  .row.soon { opacity: .5; pointer-events: none; }
+
+  footer { padding: 26px 0 40px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--cream-mid); display: flex; justify-content: space-between; }
+  footer a { color: var(--cream-mid); text-decoration: none; }
+  footer a:hover { color: var(--turq); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top"><span>toosi · studio</span><span>2026</span></div>
+    <div class="hero"><h1>toosi<br>studio</h1><span class="note">developing site — new things coming soon</span></div>
+    <div class="list">
+      <a class="row" href="/webapps/"><span class="no">01</span><span class="nm">web apps</span><span class="st2">3 projects</span></a>
+      <span class="row soon"><span class="no">02</span><span class="nm">interact</span><span class="st2">soon</span></span>
+    </div>
+    <footer><span><a href="/about">about</a></span><span><a href="#">@noosh</a> · <a href="#">email</a></span></footer>
+  </div>
+</body>
+</html>
