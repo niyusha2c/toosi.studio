@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>toosi · about</title>
+<style>
+  :root {
+    --cream: #fcfbf7;
+    --bar: rgba(255,255,255,.7);
+    --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+
+  .bar { position: fixed; left: 0; right: 0; z-index: 10; display: flex; justify-content: space-between; align-items: baseline; padding: 0 32px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--bar); pointer-events: none; }
+  .bar a { color: var(--bar); text-decoration: none; pointer-events: auto; }
+  .bar a:hover { color: var(--cream); }
+  .top { top: 0; padding-top: 30px; }
+  footer.bar { bottom: 0; padding-bottom: 30px; }
+
+  .scroller { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; }
+  section { height: 100vh; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; padding: 0 32px; }
+  section p { max-width: 600px; text-align: center; color: var(--cream); font-weight: 700; font-size: 30px; line-height: 1.3; }
+
+  .s1 { background: #2a3acb; }
+  .s2 { background: #a8372a; }
+  .s3 { background: #17181c; }
+  .s4 { background: #2a3acb; }
+</style>
+</head>
+<body>
+  <div class="bar top"><span><a href="/">toosi</a> / <span>about</span></span><span>2026</span></div>
+
+  <div class="scroller">
+    <section class="s1"><p>toosi studio &mdash; by noosh</p></section>
+    <section class="s2"><p>toosi is an experimental digital studio and an ongoing collection of projects, ideas, and experiments.</p></section>
+    <section class="s3"><p>it&rsquo;s a place to try things, follow ideas, and see where they go.</p></section>
+    <section class="s4"><p>some are finished, most are not</p></section>
+  </div>
+
+  <footer class="bar"><span><a href="/about">about</a></span><span><a href="#">@noosh</a> &middot; <a href="#">email</a></span></footer>
+</body>
+</html>
