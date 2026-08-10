@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(pkill -f \"http.server 8934\")",
+      "Bash(git revert *)"
+    ]
+  }
+}
