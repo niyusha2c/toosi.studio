@@ -1,4 +1,4 @@
-// toosi.studio cursor: a small dot that lags behind the pointer, inverts whatever is under it
+// toosi studio cursor: a small dot that lags behind the pointer, inverts whatever is under it
 // (mix-blend-mode: difference) and grows over links. SIZE_MS / SIZE_EASE control how fast it grows and shrinks;
 // the margin is animated alongside the size so the dot stays centred on its position while it resizes.
 //
