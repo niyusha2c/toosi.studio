@@ -1,5 +1,6 @@
 // toosi.studio cursor: a small dot that lags behind the pointer, inverts whatever is under it
-// (mix-blend-mode: difference) and grows over links.
+// (mix-blend-mode: difference) and grows over links. SIZE_MS / SIZE_EASE control how fast it grows and shrinks;
+// the margin is animated alongside the size so the dot stays centred on its position while it resizes.
 //
 // The visible colour is |background - dot|. With DOT_COLOUR #c8b417 (mustard):
 //   on cream (#f2eee2)              -> #2a3acb ultramarine
@@ -14,6 +15,8 @@
   const LARGE = 44;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const EASE = reduced ? 1 : 0.18; // 1 = no lag
+  const SIZE_MS = 450; // how long the dot takes to grow / shrink
+  const SIZE_EASE = 'cubic-bezier(.22,.61,.36,1)';
 
   const style = document.createElement('style');
   style.textContent = 'html, body, a, button, [role="button"] { cursor: none !important; }';
@@ -33,7 +36,8 @@
     background: DOT_COLOUR,
     mixBlendMode: 'difference',
     opacity: '0',
-    transition: 'width .2s, height .2s, opacity .2s'
+    margin: (-SMALL / 2) + 'px 0 0 ' + (-SMALL / 2) + 'px',
+    transition: reduced ? 'none' : 'width ' + SIZE_MS + 'ms ' + SIZE_EASE + ', height ' + SIZE_MS + 'ms ' + SIZE_EASE + ', margin ' + SIZE_MS + 'ms ' + SIZE_EASE + ', opacity .2s'
   });
   document.body.appendChild(dot);
 
@@ -46,13 +50,14 @@
     dot.style.opacity = '1';
     size = e.target.closest && e.target.closest(LINK) ? LARGE : SMALL;
     dot.style.width = dot.style.height = size + 'px';
+    dot.style.margin = (-size / 2) + 'px 0 0 ' + (-size / 2) + 'px';
   });
   document.documentElement.addEventListener('pointerleave', () => { dot.style.opacity = '0'; });
 
   (function frame() {
     x += (tx - x) * EASE;
     y += (ty - y) * EASE;
-    dot.style.transform = 'translate3d(' + (x - size / 2) + 'px,' + (y - size / 2) + 'px,0)';
+    dot.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
     requestAnimationFrame(frame);
   })();
 })();
