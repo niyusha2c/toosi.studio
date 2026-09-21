@@ -74,7 +74,6 @@ a:focus-visible{outline:2px solid currentColor;outline-offset:0.25rem}
   html:has(body.inner){background:var(--ultra)}
   body.inner{background:var(--ultra)}
   .inner .top,.inner .hero,.inner .main{background:var(--cream)}
-  body.inner::before{content:"";position:fixed;top:0;left:0;right:0;height:1.25rem;background:var(--cream);z-index:50;pointer-events:none}
   .foot{grid-template-columns:1fr;min-height:0;padding:1.5rem var(--pad) 1.25rem;gap:1.25rem}
   .foot h2{margin-bottom:0.625rem}
   .foot .nav{display:none}
