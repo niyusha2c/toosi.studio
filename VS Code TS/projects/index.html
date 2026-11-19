@@ -20,12 +20,18 @@
 <a class="disp logo" href="/">toosi studio</a>
 <nav class="nav" aria-label="Main"><a class="nl mono hd" aria-current="page" href="/projects/">projects</a><a class="nl mono hd" href="/objects/">objects</a><a class="nl mono hd" href="/about/">about</a><a class="nl mono hd" href="/contact/">contact</a></nav>
 </header>
-<div class="hero"><h1 class="disp page-title">projects</h1></div>
-<main class="main">
-<div class="cols">
-<section class="col"><h2 class="mono md">digital</h2><p class="mono">coming soon</p></section>
-<section class="col"><h2 class="mono md">physical</h2><p class="mono">coming soon</p></section>
+<div class="hero ptitle"><h1 class="mono kicker">projects</h1>
+<div class="disp tabs" role="tablist" aria-label="Project type"><button role="tab" id="tab-digital" aria-controls="digital" data-cat="digital">digital</button><button role="tab" id="tab-physical" aria-controls="physical" data-cat="physical">physical</button></div>
 </div>
+<main class="plist">
+<section id="digital" role="tabpanel" aria-labelledby="tab-digital">
+<ul class="grid">
+<li><a href="/projects/queer-connected/"><span class="thumb"><img src="/projects/queer-connected/thumb.jpg" alt="" width="640" height="373"></span><span class="mono name">Queer Connected</span><span class="mono meta">website &middot; 2026</span></a></li>
+</ul>
+</section>
+<section id="physical" role="tabpanel" aria-labelledby="tab-physical" hidden>
+<p class="mono">coming soon</p>
+</section>
 </main>
 <footer class="foot">
 <p class="mono sm">&copy; 2026</p>
@@ -33,6 +39,24 @@
 <div class="nav"><h2 class="mono md">pages</h2><div class="foot-links"><a class="nl mono sm" href="/projects/">projects</a><a class="nl mono sm" href="/objects/">objects</a><a class="nl mono sm" href="/about/">about</a><a class="nl mono sm" href="/contact/">contact</a></div></div>
 </footer>
 </div>
+<script>
+(() => {
+  const cats = ['digital', 'physical'];
+  const show = c => {
+    if (!cats.includes(c)) c = 'digital';
+    cats.forEach(k => {
+      document.getElementById(k).hidden = k !== c;
+      document.getElementById('tab-' + k).setAttribute('aria-selected', k === c);
+    });
+  };
+  document.querySelectorAll('[data-cat]').forEach(b => b.addEventListener('click', () => {
+    history.replaceState(null, '', '#' + b.dataset.cat);
+    show(b.dataset.cat);
+  }));
+  addEventListener('hashchange', () => show(location.hash.slice(1)));
+  show(location.hash.slice(1));
+})();
+</script>
 <script src="/js/cursor.js" defer></script>
 </body>
 </html>

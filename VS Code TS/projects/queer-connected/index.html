@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f2eee2">
+<title>Queer Connected | toosi studio</title>
+<meta name="description" content="Queer Connected website redesign by toosi studio.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:wght@500&family=Libre+Caslon+Text:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/site.css">
+</head>
+<body class="inner">
+<div class="cur-scope">
+<header class="top">
+<a class="disp logo" href="/">toosi studio</a>
+<nav class="nav" aria-label="Main"><a class="nl mono hd" aria-current="page" href="/projects/">projects</a><a class="nl mono hd" href="/objects/">objects</a><a class="nl mono hd" href="/about/">about</a><a class="nl mono hd" href="/contact/">contact</a></nav>
+</header>
+<div class="hero"><h1 class="disp page-title">Queer Connected</h1></div>
+<div class="proj-top">
+<dl class="mono facts"><div><dt>work</dt><dd>design and front-end build</dd></div><div><dt>year</dt><dd>2026</dd></div><div><dt>live</dt><dd><a href="https://queerconnected.com">queerconnected.com</a></dd></div></dl>
+<p class="mono desc">Redesign of the website for Queer Connected, a UK community app for FLINTA people. Seven pages designed and built in plain HTML, CSS and JavaScript, then handed over to their developer.</p>
+</div>
+<main class="proj">
+<figure class="fig">
+<div class="shot ba" id="ba">
+<img src="before-home.jpg" alt="Queer Connected home page before the redesign" width="1800" height="1050">
+<img class="after" src="after-home.jpg" alt="Queer Connected home page after the redesign" width="1800" height="1050">
+<span class="line" aria-hidden="true"></span>
+<span class="mono tag b">before</span><span class="mono tag a">after</span>
+<input type="range" min="0" max="100" value="50" aria-label="Before and after: drag to compare">
+</div>
+<figcaption class="mono">home page &middot; drag to compare</figcaption>
+</figure>
+<figure class="fig">
+<div class="shot"><img src="events.jpg" alt="Queer Connected events page" width="1800" height="1050" loading="lazy"></div>
+<figcaption class="mono">events page</figcaption>
+</figure>
+<figure class="fig">
+<div class="phones">
+<img class="frame" src="index-phone.jpg" alt="Queer Connected home page on a phone" width="600" height="1298" loading="lazy">
+<img class="frame" src="events-phone.jpg" alt="Queer Connected events page on a phone" width="600" height="1298" loading="lazy">
+</div>
+<figcaption class="mono">home and events on a phone</figcaption>
+</figure>
+<a class="mono back" href="/projects/">&larr; all projects</a>
+</main>
+<footer class="foot">
+<p class="mono sm">&copy; 2026</p>
+<div><h2 class="mono md">contact</h2><a class="email sm-email" href="mailto:connect@toosi.studio">connect@toosi.studio</a></div>
+<div class="nav"><h2 class="mono md">pages</h2><div class="foot-links"><a class="nl mono sm" href="/projects/">projects</a><a class="nl mono sm" href="/objects/">objects</a><a class="nl mono sm" href="/about/">about</a><a class="nl mono sm" href="/contact/">contact</a></div></div>
+</footer>
+</div>
+<script>
+(() => {
+  const cats = ['digital', 'physical'];
+  const show = c => {
+    if (!cats.includes(c)) c = 'digital';
+    cats.forEach(k => {
+      document.getElementById(k).hidden = k !== c;
+      document.getElementById('tab-' + k).setAttribute('aria-selected', k === c);
+    });
+  };
+  document.querySelectorAll('[data-cat]').forEach(b => b.addEventListener('click', () => {
+    history.replaceState(null, '', '#' + b.dataset.cat);
+    show(b.dataset.cat);
+  }));
+  addEventListener('hashchange', () => show(location.hash.slice(1)));
+  show(location.hash.slice(1));
+})();
+</script>
+<script>
+(() => {
+  const ba = document.getElementById('ba'), r = ba.querySelector('input'), a = ba.querySelector('.after'), l = ba.querySelector('.line');
+  const set = v => { a.style.clipPath = 'inset(0 0 0 ' + v + '%)'; l.style.left = v + '%'; };
+  r.addEventListener('input', () => set(r.value));
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    ba.addEventListener('pointermove', e => {
+      const b = ba.getBoundingClientRect();
+      const v = Math.max(0, Math.min(100, (e.clientX - b.left) / b.width * 100));
+      r.value = v; set(v);
+    });
+  }
+})();
+</script>
+<script src="/js/cursor.js" defer></script>
+</body>
+</html>
