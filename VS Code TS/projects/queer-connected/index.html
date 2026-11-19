@@ -37,15 +37,8 @@
 <figcaption class="mono">home page &middot; drag to compare</figcaption>
 </figure>
 <figure class="fig">
-<div class="shot"><img src="events.jpg" alt="Queer Connected events page" width="1800" height="1050" loading="lazy"></div>
-<figcaption class="mono">events page</figcaption>
-</figure>
-<figure class="fig">
-<div class="phones">
-<img class="frame" src="index-phone.jpg" alt="Queer Connected home page on a phone" width="600" height="1298" loading="lazy">
-<img class="frame" src="events-phone.jpg" alt="Queer Connected events page on a phone" width="600" height="1298" loading="lazy">
-</div>
-<figcaption class="mono">home and events on a phone</figcaption>
+<div class="shot views"><img data-view="cards" src="events.jpg" alt="Queer Connected events page, cards view" width="1800" height="1050" loading="lazy"><img data-view="month" src="events-month.jpg" alt="Queer Connected events page, month view" width="1800" height="1050" loading="lazy" hidden></div>
+<figcaption class="mono cap"><span>events page</span><span class="vt" role="group" aria-label="Events view"><button type="button" data-v="cards" aria-pressed="true">cards</button><button type="button" data-v="month" aria-pressed="false">month</button></span></figcaption>
 </figure>
 <a class="mono back" href="/projects/">&larr; all projects</a>
 </main>
@@ -78,6 +71,10 @@
   const ba = document.getElementById('ba'), r = ba.querySelector('input'), a = ba.querySelector('.after'), l = ba.querySelector('.line');
   const set = v => { a.style.clipPath = 'inset(0 0 0 ' + v + '%)'; l.style.left = v + '%'; };
   r.addEventListener('input', () => set(r.value));
+  document.querySelectorAll('.vt button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.views img').forEach(i => i.hidden = i.dataset.view !== b.dataset.v);
+    document.querySelectorAll('.vt button').forEach(x => x.setAttribute('aria-pressed', x === b));
+  }));
   if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
     ba.addEventListener('pointermove', e => {
       const b = ba.getBoundingClientRect();
