@@ -25,14 +25,15 @@
 </div>
 <main class="plist">
 <section id="digital" role="tabpanel" aria-labelledby="tab-digital">
-<ul class="grid">
-<li><a href="/projects/queer-connected/"><span class="thumb"><img src="/projects/queer-connected/thumb.jpg" alt="" width="640" height="373"></span><span class="mono name">Queer Connected</span><span class="mono meta">website &middot; 2026</span></a></li>
+<ul class="rows">
+<li><a href="/projects/queer-connected/" data-peek="/projects/queer-connected/thumb.jpg"><span class="mono name">Queer Connected</span><span class="mono meta">website &middot; 2026</span></a></li>
 </ul>
 </section>
 <section id="physical" role="tabpanel" aria-labelledby="tab-physical" hidden>
 <p class="mono">coming soon</p>
 </section>
 </main>
+<div class="peek" aria-hidden="true"><img alt="" src="/projects/queer-connected/thumb.jpg" width="640" height="373"></div>
 <footer class="foot">
 <p class="mono sm">&copy; 2026</p>
 <div><h2 class="mono md">contact</h2><a class="email sm-email" href="mailto:connect@toosi.studio">connect@toosi.studio</a></div>
@@ -55,6 +56,15 @@
   }));
   addEventListener('hashchange', () => show(location.hash.slice(1)));
   show(location.hash.slice(1));
+  if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  const peek = document.querySelector('.peek'), img = peek.querySelector('img');
+  let tx = 0, ty = 0, x = 0, y = 0;
+  document.querySelectorAll('[data-peek]').forEach(a => {
+    a.addEventListener('pointerenter', () => { img.src = a.dataset.peek; peek.classList.add('on'); });
+    a.addEventListener('pointerleave', () => peek.classList.remove('on'));
+  });
+  addEventListener('pointermove', e => { tx = e.clientX + 24; ty = e.clientY + 24; });
+  (function f() { x += (tx - x) * .14; y += (ty - y) * .14; peek.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)'; requestAnimationFrame(f); })();
 })();
 </script>
 <script src="/js/cursor.js" defer></script>
