@@ -28,7 +28,7 @@
 </div>
 <main class="proj">
 <figure class="fig">
-<div class="shot ba" id="ba">
+<div class="shot ba">
 <img src="before-home.jpg" alt="Queer Connected home page before the redesign" width="1800" height="1050">
 <img class="after" src="after-home.jpg" alt="Queer Connected home page after the redesign" width="1800" height="1050">
 <span class="line" aria-hidden="true"></span>
@@ -38,8 +38,15 @@
 <figcaption class="mono">home page &middot; drag to compare</figcaption>
 </figure>
 <figure class="fig">
-<div class="shot views"><img data-view="cards" src="events.jpg" alt="Queer Connected events page, cards view" width="1800" height="1050" loading="lazy"><img data-view="month" src="events-month.jpg" alt="Queer Connected events page, month view" width="1800" height="1050" loading="lazy" hidden></div>
-<figcaption class="mono cap"><span>events page</span><span class="vt" role="group" aria-label="Events view"><button type="button" data-v="cards" aria-pressed="true">cards</button><button type="button" data-v="month" aria-pressed="false">month</button></span></figcaption>
+<div class="shot ba views">
+<img src="before-events.jpg" alt="Queer Connected events page before the redesign, rebuilt from the old site's code" width="1800" height="1050" loading="lazy">
+<img class="after" data-view="cards" src="events.jpg" alt="Queer Connected events page after the redesign, cards view" width="1800" height="1050" loading="lazy">
+<img class="after" data-view="month" src="events-month.jpg" alt="Queer Connected events page after the redesign, month view" width="1800" height="1050" loading="lazy" hidden>
+<span class="line" aria-hidden="true"></span>
+<span class="mono tag b">before (rebuilt)</span><span class="mono tag a">after</span>
+<input type="range" min="0" max="100" value="50" aria-label="Events page before and after: drag to compare">
+</div>
+<figcaption class="mono cap"><span>events page &middot; drag to compare</span><span class="vt" role="group" aria-label="Events view"><button type="button" data-v="cards" aria-pressed="true">cards</button><button type="button" data-v="month" aria-pressed="false">month</button></span></figcaption>
 </figure>
 <a class="mono back" href="/projects/">&larr; all projects</a>
 </main>
@@ -52,20 +59,21 @@
 </div>
 <script>
 (() => {
-  const ba = document.getElementById('ba'), r = ba.querySelector('input'), a = ba.querySelector('.after'), l = ba.querySelector('.line');
-  const set = v => { a.style.clipPath = 'inset(0 0 0 ' + v + '%)'; l.style.left = v + '%'; };
-  r.addEventListener('input', () => set(r.value));
-  document.querySelectorAll('.vt button').forEach(b => b.addEventListener('click', () => {
-    document.querySelectorAll('.views img').forEach(i => i.hidden = i.dataset.view !== b.dataset.v);
-    document.querySelectorAll('.vt button').forEach(x => x.setAttribute('aria-pressed', x === b));
-  }));
-  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    ba.addEventListener('pointermove', e => {
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  document.querySelectorAll('.ba').forEach(ba => {
+    const r = ba.querySelector('input'), l = ba.querySelector('.line');
+    const set = v => { ba.querySelectorAll('.after').forEach(a => a.style.clipPath = 'inset(0 0 0 ' + v + '%)'); l.style.left = v + '%'; };
+    r.addEventListener('input', () => set(r.value));
+    if (fine) ba.addEventListener('pointermove', e => {
       const b = ba.getBoundingClientRect();
       const v = Math.max(0, Math.min(100, (e.clientX - b.left) / b.width * 100));
       r.value = v; set(v);
     });
-  }
+  });
+  document.querySelectorAll('.vt button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.views img[data-view]').forEach(i => i.hidden = i.dataset.view !== b.dataset.v);
+    document.querySelectorAll('.vt button').forEach(x => x.setAttribute('aria-pressed', x === b));
+  }));
 })();
 </script>
 <script src="/js/cursor.js" defer></script>
